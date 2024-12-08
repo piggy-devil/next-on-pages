@@ -1,7 +1,19 @@
-import type { NextConfig } from "next";
+import { setupDevPlatform } from "@cloudflare/next-on-pages/next-dev";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+if (process.env.NODE_ENV === "development") {
+  setupDevPlatform();
+}
+
+/** @type {import('next').NextConfig} */
+const nextConfig: import("next").NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "drive.google.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
